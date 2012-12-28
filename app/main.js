@@ -8,7 +8,7 @@ require([
 ], function(_, Backbone, Playlist, Video, Form, MediaCollection){
 
   var Playr = Backbone.View.extend({
-    el: $('#main'),
+    el: $('body'),
 
     initialize: function(){
       this.media = new MediaCollection();
@@ -20,6 +20,17 @@ require([
       this.video    = new Video( options );
       this.form     = new Form( options );
       this.playlist = new Playlist( options );
+
+      this.listenTo( Backbone, 'playing', this.playing);
+      this.listenTo( Backbone, 'pause', this.pause);
+    },
+
+    playing: function(){
+      this.$el.addClass('playing');
+    },
+
+    pause: function(){
+      this.$el.removeClass('playing');
     }
   });
 

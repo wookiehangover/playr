@@ -1,40 +1,168 @@
 @import 'bootstrap/bootstrap.less';
 
 #video {
-  height: 480px; width: 100%;
-  background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+  height: 500px; width: 100%;
+  background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
   margin-bottom: 10px;
   position: relative;
+  overflow: hidden;
+  .transition(all 500ms ease-out);
 
   .controls {
     position: absolute;
-    left: 0;
-    bottom: 0;
+    right: 0;
+    top: 0;
     background: rgba(255,255,255,0.8);
     float: left;
     z-index: 1000;
+
+    a {
+      color: #404040;
+      padding: 8px 12px 6px;
+      float: left;
+      text-decoration: none;
+      .transition(all 100ms ease-out);
+
+      &:hover {
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+      }
+    }
+  }
+
+  &.soundcloud {
+    .media-item {
+      .transition(all 300ms ease-out 200ms);
+      top: 170px;
+    }
+  }
+
+  .media-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 480px;
+    float: left;
+    .opacity(0);
+    .transition(all 300ms ease-out);
+    z-index: 200;
+
+    &.js-loaded {
+      .opacity(100);
+    }
+
+    &.js-hidden {
+      .opacity(0);
+      z-index: 100;
+    }
+
   }
 }
 
 
-.media-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  float: left;
-  .opacity(0);
-  .transition(all 300ms ease-out);
-  z-index: 200;
 
-  &.js-loaded {
-    .opacity(100);
+#add-video {
+  textarea {
+    width: 280px;
+    height: 90px;
+    .pull-right();
+    border: 1px solid #ccc;
   }
 
-  &.js-hidden {
-    .opacity(0);
-    z-index: 100;
-    iframe { display: none; visibility: hidden; }
+  .btn {
+    .pull-right();
+    .border-radius(0);
+    border: none;
+    background: #999;
+    padding: 10px
+    height: 40px;
+    padding: 0 30px;
+    text-align: center;
+    font-size: 14px;
+    line-height: 40px;
+    background: #0E94D3;
+    color: #fff;
+    .transition(all 600ms ease-out);
+
+    &:hover {
+      background: #0EB3D3;
+    }
   }
+}
+
+#playlist {
+  margin: 0 0 0 20px;
+  list-style: none;
+
+  li {
+    float: left;
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 20px;
+
+    h2, p {
+      padding-left: 20px;
+    }
+
+    background: rgba(204, 204, 204, 0.5);
+
+    &.js-active {
+      background: #d5faff;
+    }
+  }
+}
+
+body {
+  .transition(all 500ms ease-out);
+
+  &.playing {
+    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+
+    #video { background: rgba(0,0,0,0.1); }
+
+    -webkit-animation: rainbows 60s infinite 3s;
+       -moz-animation: rainbows 60s infinite 3s;
+         -o-animation: rainbows 60s infinite 3s;
+            animation: rainbows 60s infinite 3s;
+  }
+
+}
+
+
+@-webkit-keyframes rainbows {
+  0%   { background-color: #fff; }
+  16%  { background-color: rgba(0, 14, 96, 0.8); }
+  32%  { background-color: rgba(255, 0, 94, 0.8); }
+  48%  { background-color: rgba(255, 217, 102, 0.8); }
+  64%  { background-color: rgba(0, 240, 77, 0.8); }
+  80%  { background-color: rgba(0, 14, 96, 0.8); }
+  100% { background-color: #fff; }
+}
+@-moz-keyframes rainbows {
+  0%   { background-color: #fff; }
+  16%  { background-color: rgba(0, 14, 96, 0.8); }
+  32%  { background-color: rgba(255, 0, 94, 0.8); }
+  48%  { background-color: rgba(255, 217, 102, 0.8); }
+  64%  { background-color: rgba(0, 240, 77, 0.8); }
+  80%  { background-color: rgba(0, 14, 96, 0.8); }
+  100% { background-color: #fff; }
+}
+@-ms-keyframes rainbows {
+  0%   { background-color: #fff; }
+  16%  { background-color: rgba(0, 14, 96, 0.8); }
+  32%  { background-color: rgba(255, 0, 94, 0.8); }
+  48%  { background-color: rgba(255, 217, 102, 0.8); }
+  64%  { background-color: rgba(0, 240, 77, 0.8); }
+  80%  { background-color: rgba(0, 14, 96, 0.8); }
+  100% { background-color: #fff; }
+}
+@keyframes rainbows {
+  0%   { background-color: #fff; }
+  16%  { background-color: rgba(0, 14, 96, 0.8); }
+  32%  { background-color: rgba(255, 0, 94, 0.8); }
+  48%  { background-color: rgba(255, 217, 102, 0.8); }
+  64%  { background-color: rgba(0, 240, 77, 0.8); }
+  80%  { background-color: rgba(0, 14, 96, 0.8); }
+  100% { background-color: #fff; }
 }

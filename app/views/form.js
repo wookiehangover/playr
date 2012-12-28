@@ -18,12 +18,14 @@ define([
     },
 
     addVideo: function(e){
+      e.preventDefault();
 
       var data = $.deparam( this.$('form').serialize() );
 
-      this.collection.add( data );
+      if( this.collection.add( data, { parse: true }) ){
+        this.$('textarea').val('');
+      }
 
-      return false;
     }
   });
 

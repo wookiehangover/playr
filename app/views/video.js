@@ -1,8 +1,9 @@
 define([
   'underscore',
   'backbone',
-  'views/video-item'
-], function(_, Backbone, VideoItem){
+  'views/video-item',
+  'views/video-controls'
+], function(_, Backbone, VideoItem, Controls){
 
   return Backbone.View.extend({
 
@@ -13,28 +14,18 @@ define([
         throw new Error('Requires a collection');
       }
 
+      this.controls = new Controls({ parent: this });
+
       this.listenTo( this.collection, 'add', this.add);
+      this.listenTo( this.collection, 'activated', this.update);
     },
 
     add: function( model ){
       model.video = new VideoItem({ model: model, parent: this });
     },
 
-    events: {
-      'click [data-action]': 'controls'
-    },
-
-    controls: function(e){
-      var action = $(e.currentTarget).data('action');
-
-      if( this.active && this.active.pop[ action ] ){
-        this.active.pop[action]();
-      }
-
-      if( action === 'next' ){
-        this.collection.next();
-      }
-      return false;
+    update: function( model ){
+      this.$el.removeClass().addClass( model.get('type') );
     }
 
   });

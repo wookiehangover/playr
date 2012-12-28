@@ -1,1 +1,5 @@
+<% if(typeof metadata !== "undefined"){ %>
+<h2><%= metadata.get('title') %></h2>
+<% } %>
 <p><%= get('url') %></p>
+<a href="#" data-action="destroy">remove</a>

@@ -13,28 +13,48 @@ define([
     },
 
     initialize: function( params ){
+      var self = this;
       this.parent = params.parent;
+
+      if( !this.parent ){
+        throw new Error('Requires a Parent view');
+      }
 
       if( !this.model ){
         throw new Error('Requires a model');
       }
 
-      this.pop = Popcorn.smart(this.el, this.model.get('url'), {
+      this.dfd = $.Deferred();
+
+      this.render();
+
+      this.pop = Popcorn.smart('#'+ this.id(), this.model.get('url'), {
         controls: true,
         width: 940,
         height: 480
       });
 
-      this.dfd = $.Deferred();
-
       this.listenTo(this.model, 'activate', this.activate);
 
       this.pop.on('canplay', _.once( this.ready ).bind(this) );
 
-      this.render();
+      _.each(['playing', 'pause'], function(evt){
+        self.pop.on( evt, function(){
+          if( self.model.get('active') ){
+            Backbone.trigger(evt, self.model);
+          }
+        });
+      });
 
-      if( !this.parent.active ){
-        this.model.trigger('activate');
+      this.pop.on('pause', function(){
+        Backbone.trigger('pause', this.model);
+      }, this);
+
+      if( this.model.collection.where({ active: true }).length === 0 ){
+        this.model.set('active', true);
+        setTimeout(function(){
+          self.model.trigger('activate', true);
+        },0);
       }
     },
 
@@ -46,14 +66,19 @@ define([
       }
 
       self.$el.addClass('js-loaded');
-      self.dfd.resolve();
 
-      self.pop.cue(self.pop.duration() - 0.5, function(){
-        self.model.collection.trigger('next', self.model);
+      self.pop.cue(self.pop.duration() - 1, function(){
+
+        setTimeout(function(){
+          self.model.collection.next(self.model);
+        }, 1000);
+
       });
+
+      self.dfd.resolve();
     },
 
-    activate: function(){
+    activate: function( play ){
       var self = this;
       this.model.collection.each(function(m){
         if( m.video && m !== self ){
@@ -61,14 +86,17 @@ define([
         }
       });
 
-      this.play();
+      if( play ){
+        this.play();
+      }
 
-      this.addClass('js-active');
+      this.$el.addClass('js-active').removeClass('js-hidden');
 
       this.parent.active = this;
     },
 
     render: function(){
+      this.$el.addClass( this.model.get('type') );
       this.parent.$el.append( this.el );
     },
 
@@ -77,15 +105,14 @@ define([
       this.$el.addClass('js-hidden').removeClass('js-active');
     },
 
-    show: function(){
-      this.$el.removeClass('js-hidden');
-    },
-
     play: function(){
       var self = this;
       this.dfd.done(function(){
-        self.show();
-        self.pop.play();
+        // make sure that the player is visible when it's played
+        self.$el.removeClass('js-hidden');
+        setTimeout(function(){
+          self.pop.play();
+        },100);
       });
     }
 

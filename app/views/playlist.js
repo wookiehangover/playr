@@ -13,7 +13,6 @@ define([
       }
 
       this.listenTo( this.collection, 'add', this.add);
-
     },
 
     add: function( model, collection ){

@@ -27,25 +27,18 @@
           <a href="#" data-action="pause">Pause</a>
           <a href="#" data-action="next">Next</a>
         </div>
+        <div class="scrubber">
+          <div class="handle"></div>
+        </div>
       </div>
 
       <div class="row">
-        <div id="playlist" class="span8">
-
-        </div>
+        <ul id="playlist" class="span8"></ul>
 
         <div id="add-video" class="span4">
-          <h3 class="heading">Add More Songs:</h3>
           <form action="#">
-            <select name="type">
-              <option value="YouTube">YouTube</option>
-              <option value="SoundCloud">SoundCloud</option>
-            </select>
-            <textarea name="url" placeholder="Video URL (eg. http://youtu.be/e2QKlmMT8II)"></textarea> 
-            <div class="form-actions">
-              <button class="btn btn-primary">Save</button>
-              <button class="btn">Cancel</button>
-            </div>
+            <textarea name="url" placeholder="Add Songs or Videos by their URL or Embed Code (eg. http://youtu.be/e2QKlmMT8II)"></textarea> 
+            <button class="btn btn-primary">Add to Set</button>
           </form>
         </div>
       </div>

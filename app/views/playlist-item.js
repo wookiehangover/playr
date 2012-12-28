@@ -6,6 +6,8 @@ define([
 
   return Backbone.View.extend({
 
+    tagName: 'li',
+
     initialize: function(params){
       this.parent = params.parent;
       if( !this.model ){
@@ -13,19 +15,33 @@ define([
       }
 
       this.render();
+      this.parent.$el.append( this.el );
+
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'activate', this.activate);
     },
 
     render: function(){
       this.$el.html( itemTpl( this.model ) );
-      this.parent.$el.append( this.el );
+    },
+
+    activate: function(){
+      this.parent.$('.js-active').removeClass('js-active');
+      this.$el.addClass('js-active');
     },
 
     events: {
-      'click p': 'play'
+      'click': 'play',
+      'click [data-action="destroy"]': 'destroy'
     },
 
     play: function(){
-      this.model.trigger('activate');
+      this.model.trigger('activate', true);
+    },
+
+    destroy: function(){
+      this.model.destroy();
+      return false;
     }
 
   });
