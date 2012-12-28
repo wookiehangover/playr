@@ -22,7 +22,7 @@ define([
     initialize: function(){
       var self = this;
       this.setType();
-      this.enhance();
+      this.setMetadata();
 
       this.on('play', this.play);
 
@@ -66,7 +66,7 @@ define([
       }, this);
     },
 
-    enhance: function(){
+    setMetadata: function(){
       var type = this.get('type');
 
       if( type === 'youtube' ){
