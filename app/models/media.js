@@ -2,8 +2,9 @@ define([
   'underscore',
   'backbone',
   'popcorn-require',
-  'models/youtube'
-], function(_, Backbone, Popcorn, YoutubeModel){
+  'models/youtube',
+  'models/soundcloud'
+], function(_, Backbone, Popcorn, YoutubeModel, SoundcloudModel){
 
   var types = {
     youtube: /youtube/,
@@ -23,8 +24,6 @@ define([
       var self = this;
       this.setType();
       this.setMetadata();
-
-      this.on('play', this.play);
 
       this.on('activate', function(){
         this.set('active', true);
@@ -55,12 +54,6 @@ define([
       this.collection.remove( this );
     },
 
-    play: function(){
-      if( this.video && this.video.pop ){
-        this.video.pop.play();
-      }
-    },
-
     setType: function(){
       _.find(types, function(regex, type){
         if( regex.test( this.get('url') ) ){
@@ -75,7 +68,13 @@ define([
 
       if( type === 'youtube' ){
         this.metadata = new YoutubeModel(null, { parent: this });
+      }
 
+      if( type === "soundcloud" ){
+        this.metadata = new SoundcloudModel(null, { parent: this });
+      }
+
+      if( this.metadata ){
         this.metadata.on('change', function(){
           this.trigger('change');
         }, this);
