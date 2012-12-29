@@ -11,10 +11,10 @@ require([
     el: $('body'),
 
     initialize: function(){
-      this.media = new MediaCollection();
+      this.collection = new MediaCollection();
 
       var options = {
-        collection: this.media
+        collection: this.collection
       };
 
       this.video    = new Video( options );
