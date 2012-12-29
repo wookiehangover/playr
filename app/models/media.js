@@ -3,8 +3,9 @@ define([
   'backbone',
   'popcorn-require',
   'models/youtube',
-  'models/soundcloud'
-], function(_, Backbone, Popcorn, YoutubeModel, SoundcloudModel){
+  'models/soundcloud',
+  'models/vimeo'
+], function(_, Backbone, Popcorn, YoutubeModel, SoundcloudModel, VimeoModel){
 
   var types = {
     youtube: /youtube/,
@@ -72,6 +73,10 @@ define([
 
       if( type === "soundcloud" ){
         this.metadata = new SoundcloudModel(null, { parent: this });
+      }
+
+      if( type === "vimeo" ){
+        this.metadata = new VimeoModel(null, { parent: this });
       }
 
       if( this.metadata ){

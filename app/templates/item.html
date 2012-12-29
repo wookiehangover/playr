@@ -1,5 +1,12 @@
 <% if(typeof metadata !== "undefined"){ %>
-<h2><%= metadata.get('title') %></h2>
+  <h2><%= metadata.get('title') %></h2>
+
+  <% if( metadata.get('artwork_url') ){ %>
+  <img src="<%= metadata.get('artwork_url') %>"/>
+  <% } %>
 <% } %>
 <p><%= get('url') %></p>
-<a href="#" data-action="destroy">remove</a>
+
+<div class="controls">
+  <a href="#" data-action="destroy">remove</a>
+</div>
