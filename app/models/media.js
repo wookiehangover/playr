@@ -41,13 +41,17 @@ define([
       this.view.remove();
 
       if( this.video ){
-        this.video.pop.pause();
         this.video.remove();
       }
 
       if( this.get('active') ){
         this.collection.next( this );
       }
+
+      if( this.collection.length === 1 ){
+        Backbone.trigger('pause');
+      }
+
       this.collection.remove( this );
     },
 

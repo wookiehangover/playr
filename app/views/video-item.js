@@ -95,6 +95,7 @@ define([
 
     activate: function( play ){
       var self = this;
+
       this.model.collection.each(function(m){
         if( m.video && m !== self ){
           m.video.hide();
@@ -129,6 +130,12 @@ define([
           self.pop.play();
         },100);
       });
+    },
+
+    remove: function(){
+      this.pop.pause();
+      this.pop.destroy();
+      Backbone.View.prototype.remove.call(this);
     }
 
   });
