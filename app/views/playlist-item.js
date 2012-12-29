@@ -39,9 +39,9 @@ define([
       this.model.trigger('activate', true);
     },
 
-    destroy: function(){
+    destroy: function(e){
+      e.preventDefault();
       this.model.destroy();
-      return false;
     }
 
   });

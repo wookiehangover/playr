@@ -5287,6 +5287,9 @@ body {
 #playlist > li.js-active {
   background: #d5faff;
 }
+#playlist > li.welcome h2 {
+  max-width: none;
+}
 #playlist ol {
   padding-left: 20px;
 }

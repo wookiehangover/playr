@@ -46,7 +46,7 @@ require([
       if( window.Playr.video.active ){
         localStorage.currentTime = window.Playr.video.active.pop.currentTime();
       } else {
-        localStorage.currentTime = false;
+        localStorage.currentTime = 0;
       }
     });
 
