@@ -40,6 +40,10 @@ define([
         title: data.entry.title.$t
       };
 
+      if( data.entry.media$group.media$thumbnail ){
+        ret.artwork_url = data.entry.media$group.media$thumbnail[0].url;
+      }
+
       return ret;
     }
 
