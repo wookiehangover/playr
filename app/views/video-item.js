@@ -34,6 +34,19 @@ define([
         height: 480
       });
 
+      this.listeners();
+
+      if( this.model.collection.where({ active: true }).length === 0 ){
+        this.model.set('active', true);
+        setTimeout(function(){
+          self.model.trigger('activate', true);
+        },0);
+      }
+    },
+
+    listeners: function(){
+      var self = this;
+
       this.listenTo(this.model, 'activate', this.activate);
 
       this.pop.on('canplay', _.once( this.ready ).bind(this) );
@@ -50,12 +63,14 @@ define([
         Backbone.trigger('pause', this.model);
       }, this);
 
-      if( this.model.collection.where({ active: true }).length === 0 ){
-        this.model.set('active', true);
-        setTimeout(function(){
-          self.model.trigger('activate', true);
-        },0);
-      }
+      var currentTime = 0;
+      this.pop.on('timeupdate', function(){
+        var newTime = self.pop.currentTime();
+        if( newTime !== currentTime ){
+          self.parent.trigger('timeupdate', newTime);
+          currentTime = newTime;
+        }
+      });
     },
 
     ready: function(){
