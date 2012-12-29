@@ -17,9 +17,15 @@
   </head>
   <body>
 
-    <div class="container" id="main">
-
+    <header id="main-header">
       <h1>Playr</h1>
+      <div id="scrubber">
+        <div class="handle"></div>
+        <marquee scrolldelay="200"></marquee>
+      </div>
+    </header>
+
+    <div class="container" id="main">
 
       <div id="video">
         <div class="controls">
@@ -55,6 +61,7 @@
 
 
     <script src="assets/js/vendor/jquery.min.js"></script>
+    <!-- <script src="assets/src/playr.js"></script> -->
     <script data-main="app/config" src="assets/js/vendor/require.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
