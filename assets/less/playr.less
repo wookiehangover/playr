@@ -34,6 +34,8 @@
     .media-item {
       .transition(all 300ms ease-out 200ms);
       top: 170px;
+      height: 160px;
+      text-align: left;
     }
   }
 
@@ -55,11 +57,25 @@
       .opacity(0);
       z-index: 100;
     }
+  }
 
+  .scrubber {
+    width: 100%;
+    position: absolute;
+    bottom: 0; left: 0;
+    background: rgba(0,0,0,0.1);
+    height: 20px;
+
+    .handle {
+      position: absolute;
+      top: 0; left: 0;
+      width: 8px;
+      height: 20px;
+      background: rgba(255,255,255,0.5);
+      .transition(width 100ms ease-in);
+    }
   }
 }
-
-
 
 #add-video {
   textarea {
@@ -94,7 +110,7 @@
   margin: 0 0 0 20px;
   list-style: none;
 
-  li {
+  > li {
     float: left;
     width: 100%;
     padding: 20px 0;
@@ -110,21 +126,29 @@
       background: #d5faff;
     }
   }
+
+  ol {
+    padding-left: 20px;
+    li {
+      font-size: 16px;
+      padding-bottom: 1em;
+    }
+  }
 }
 
 body {
   .transition(all 500ms ease-out);
 
-  &.playing {
-    background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+  // &.playing {
+  //   background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
 
-    #video { background: rgba(0,0,0,0.1); }
+  //   #video { background: rgba(0,0,0,0.1); }
 
-    -webkit-animation: rainbows 60s infinite 3s;
-       -moz-animation: rainbows 60s infinite 3s;
-         -o-animation: rainbows 60s infinite 3s;
-            animation: rainbows 60s infinite 3s;
-  }
+  //   -webkit-animation: rainbows 60s infinite 3s;
+  //      -moz-animation: rainbows 60s infinite 3s;
+  //        -o-animation: rainbows 60s infinite 3s;
+  //           animation: rainbows 60s infinite 3s;
+  // }
 
 }
 

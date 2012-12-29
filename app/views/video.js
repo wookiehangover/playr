@@ -2,8 +2,9 @@ define([
   'underscore',
   'backbone',
   'views/video-item',
-  'views/video-controls'
-], function(_, Backbone, VideoItem, Controls){
+  'views/video-controls',
+  'views/video-scrubber'
+], function(_, Backbone, VideoItem, Controls, Scrubber){
 
   return Backbone.View.extend({
 
@@ -15,6 +16,7 @@ define([
       }
 
       this.controls = new Controls({ parent: this });
+      this.scrubber = new Scrubber({ parent: this });
 
       this.listenTo( this.collection, 'add', this.add);
       this.listenTo( this.collection, 'activated', this.update);
