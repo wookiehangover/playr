@@ -7,7 +7,7 @@ require([
   'collections/media'
 ], function(_, Backbone, Playlist, Video, Form, MediaCollection){
 
-  var Playr = Backbone.View.extend({
+  var App = Backbone.View.extend({
     el: $('body'),
 
     initialize: function(){
@@ -35,7 +35,21 @@ require([
   });
 
   $(function(){
-    window.Playr = new Playr();
+    window.Playr = new App();
+
+    if( localStorage.playlist ){
+      window.Playr.collection.add( JSON.parse( localStorage.playlist ) );
+    }
+
+    $(window).bind('beforeunload', function(e){
+      localStorage.playlist = JSON.stringify( window.Playr.collection.toJSON() );
+      if( window.Playr.video.active ){
+        localStorage.currentTime = window.Playr.video.active.pop.currentTime();
+      } else {
+        localStorage.currentTime = false;
+      }
+    });
+
   });
 
 

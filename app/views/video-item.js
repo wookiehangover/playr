@@ -6,7 +6,7 @@ define([
 
   return Backbone.View.extend({
 
-    className: 'media-item',
+    className: 'media-item js-hidden',
 
     id: function(){
       return 'video-'+ this.model.cid;
@@ -36,7 +36,7 @@ define([
 
       this.listeners();
 
-      if( this.model.collection.where({ active: true }).length === 0 ){
+      if( this.model.collection.where({ active: true }).length === 0 || this.model.get('active') ){
         this.model.set('active', true);
         setTimeout(function(){
           self.model.trigger('activate', true);
@@ -127,7 +127,14 @@ define([
         // make sure that the player is visible when it's played
         self.$el.removeClass('js-hidden');
         setTimeout(function(){
-          self.pop.play();
+
+          if( localStorage.currentTime !== "0" ){
+            self.pop.play(localStorage.currentTime);
+            localStorage.currentTime = 0;
+          } else {
+            self.pop.play();
+          }
+
         },100);
       });
     },
