@@ -5160,6 +5160,7 @@ a.badge:hover {
 }
 #video .media-item {
   position: absolute;
+  text-align: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -5263,6 +5264,7 @@ body {
 }
 #playlist > li {
   float: left;
+  position: relative;
   width: 100%;
   padding: 20px 0;
   margin-bottom: 20px;
@@ -5270,6 +5272,16 @@ body {
 }
 #playlist > li h2,
 #playlist > li p {
+  padding-left: 20px;
+  max-width: 460px;
+}
+#playlist > li img {
+  position: absolute;
+  width: 120px;
+  right: 20px;
+  top: 20px;
+}
+#playlist > li .controls {
   padding-left: 20px;
 }
 #playlist > li.js-active {
