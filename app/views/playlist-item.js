@@ -8,6 +8,10 @@ define([
 
     tagName: 'li',
 
+    id: function(){
+      return 'item'+ this.model.cid;
+    },
+
     initialize: function(params){
       this.parent = params.parent;
       if( !this.model ){
@@ -15,14 +19,16 @@ define([
       }
 
       this.render();
-      this.parent.$el.append( this.el );
+      this.parent.$('.ghost').before( this.el );
 
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'activate', this.activate);
     },
 
     render: function(){
-      this.$el.html( itemTpl( this.model ) );
+      this.$el
+        .attr('draggable', true)
+        .html( itemTpl( this.model ) );
     },
 
     activate: function(){

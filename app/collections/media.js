@@ -8,7 +8,26 @@ define([
     model: MediaModel,
 
     initialize: function(){
+      this.on('add', function(model){
+        if( !model.get('order') ){
+          model.set('order', this.indexOf(model));
+        }
+      }, this);
 
+      this.on('usersort', this.userSort);
+    },
+
+    userSort: function(){
+      this.each(function(model){
+        var index = model.view.$el.index() - 1;
+        model.set({ order: index }, { silent: true });
+      });
+
+      this.sort();
+    },
+
+    comparator: function(model){
+      return model.get('order');
     },
 
     next: function( model ){

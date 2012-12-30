@@ -65,14 +65,19 @@ define([
       var handle = this.handle;
       var offset = this.$el.offset().left;
 
+      function onMove(e){
+        var position = e.pageX - offset - self.handleWidth;
+        handle.css('left', position);
+        self.scrub( position * self.duration /  self.scrubberWidth );
+      }
+
+      function onRelease(){
+        $(this).off('.scrubber');
+      }
+
       $(window)
-        .on('mousemove.scrubber', function(e){
-          var position = e.pageX - offset - self.handleWidth;
-          handle.css('left', position);
-          self.scrub( position * self.duration /  self.scrubberWidth );
-        }).one('mouseup.scrubber', function(){
-          $(this).off('.scrubber');
-        });
+        .on('mousemove.scrubber', onMove)
+        .one('mouseup.scrubber', onRelease);
     },
 
     scrub: function(time){
