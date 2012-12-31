@@ -23,17 +23,24 @@ define([
 
     initialize: function(){
       var self = this;
-      this.setType();
+
+      if( !this.get('type') ){
+        this.setType();
+      }
+
       this.setMetadata();
 
       this.on('activate', function(){
         this.set('active', true);
-        this.collection.each(function(m){
-          if( m.cid !== self.cid ){
-            m.set('active', false);
-          }
-        });
-        this.collection.trigger('activated', this);
+
+        if( this.collection ){
+          this.collection.each(function(m){
+            if( m.cid !== self.cid ){
+              m.set('active', false);
+            }
+          });
+          this.collection.trigger('activated', this);
+        }
       }, this);
     },
 
