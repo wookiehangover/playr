@@ -1,8 +1,9 @@
 define([
   'underscore',
   'backbone',
-  'models/media'
-], function(_, Backbone, MediaModel){
+  'models/media',
+  'models/playlist'
+], function(_, Backbone, MediaModel, PlaylistModel){
 
   return Backbone.Collection.extend({
     model: MediaModel,
@@ -15,6 +16,8 @@ define([
       }, this);
 
       this.on('usersort', this.userSort);
+
+      this.playlist = new PlaylistModel(null, { parent: this });
     },
 
     userSort: function(){
@@ -42,6 +45,7 @@ define([
 
       this.at( next ).trigger('activate', true);
     }
+
   });
 
 });
