@@ -27,7 +27,7 @@ define([
     },
 
     update: function( model ){
-      this.$el.removeClass().addClass( model.get('type') );
+      this.$el.removeClass().addClass( model.get('flavor') );
     }
 
   });

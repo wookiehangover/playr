@@ -58,14 +58,14 @@ define([
     setType: function(){
       _.find(types, function(regex, type){
         if( regex.test( this.get('url') ) ){
-          this.set('type', type);
+          this.set('flavor', type);
           return true;
         }
       }, this);
     },
 
     setMetadata: function(){
-      var type = this.get('type');
+      var type = this.get('flavor');
 
       if( type === 'youtube' ){
         this.metadata = new YoutubeModel(null, { parent: this });

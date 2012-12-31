@@ -112,7 +112,7 @@ define([
     },
 
     render: function(){
-      this.$el.addClass( this.model.get('type') );
+      this.$el.addClass( this.model.get('flavor') );
       this.parent.$el.append( this.el );
     },
 
