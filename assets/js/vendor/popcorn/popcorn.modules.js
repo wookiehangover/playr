@@ -534,7 +534,7 @@
       for ( j = 0; j < wrappers.length; j++ ) {
         mediaWrapper = Popcorn[ wrappers[ j ] ];
         if ( mediaWrapper && mediaWrapper._canPlaySrc( srci ) === "probably" ) {
-          media = mediaWrapper( node, options );
+          media = mediaWrapper( node );
           popcorn = Popcorn( media, options );
           // Set src, but not until after we return the media so the caller
           // can get error events, if any.

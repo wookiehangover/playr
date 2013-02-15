@@ -758,7 +758,7 @@
         seeking: false,
         autoplay: EMPTY_STRING,
         preload: EMPTY_STRING,
-        controls: true,
+        controls: false,
         loop: false,
         poster: EMPTY_STRING,
         // SC Volume values are 0-100, we remap to 0-1 in volume getter/setter
@@ -768,8 +768,8 @@
         duration: NaN,
         ended: false,
         paused: true,
-        width: parent.width|0   ? parent.width  : 940, //self._util.MIN_WIDTH,
-        height: parent.height|0 ? parent.height : 160, //self._util.MIN_HEIGHT,
+        width: parent.width|0   ? parent.width  : self._util.MIN_WIDTH,
+        height: parent.height|0 ? parent.height : self._util.MIN_HEIGHT,
         error: null
       },
       playerReady = false,
@@ -1197,7 +1197,6 @@
     }
 
     function setControls( controls ) {
-
       // If the iframe elem isn't ready yet, bail.  We'll call again when it is.
       if ( elem ) {
         // Due to loading issues with hidden content, we have to be careful
@@ -1424,7 +1423,7 @@
   }
 
 
-  function HTMLVimeoVideoElement( id, options ) {
+  function HTMLVimeoVideoElement( id ) {
 
     // Vimeo iframe API requires postMessage
     if( !window.postMessage ) {
@@ -1453,8 +1452,8 @@
         duration: NaN,
         ended: false,
         paused: true,
-        width: options.width|0   ? options.width  : MIN_WIDTH,
-        height: options.height|0 ? options.height : MIN_HEIGHT,
+        width: parent.width|0   ? parent.width  : MIN_WIDTH,
+        height: parent.height|0 ? parent.height : MIN_HEIGHT,
         error: null
       },
       playerReady = false,
@@ -2005,8 +2004,8 @@
     return type === "video/x-vimeo" ? "probably" : EMPTY_STRING;
   };
 
-  Popcorn.HTMLVimeoVideoElement = function( id, options ) {
-    return new HTMLVimeoVideoElement( id, options );
+  Popcorn.HTMLVimeoVideoElement = function( id ) {
+    return new HTMLVimeoVideoElement( id );
   };
   Popcorn.HTMLVimeoVideoElement._canPlaySrc = HTMLVimeoVideoElement.prototype._canPlaySrc;
 
