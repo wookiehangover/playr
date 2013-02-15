@@ -11,6 +11,18 @@
     background: rgba(204, 204, 204, 0.5);
     .transition(opacity 300ms ease-out);
 
+    a[data-action=destroy] {
+      position: absolute;
+      top: 5px;
+      right: 2px;
+      font-size: 1.2em;
+      color: #333;
+      &:hover {
+        text-decoration: none;
+        &:before { content: "\f111"; }
+      }
+    }
+
     h2, p {
       padding-left: 20px;
       max-width: 460px;
