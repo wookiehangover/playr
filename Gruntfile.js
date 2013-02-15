@@ -32,6 +32,19 @@ module.exports = function(grunt){
       ]
     },
 
+    targethtml: {
+      release: {
+        files: {
+          'index.html': 'app/templates/index.html'
+        }
+      },
+      debug: {
+        files: {
+          'index.html': 'app/templates/index.html'
+        }
+      }
+    },
+
     jshint: {
       options: {
         curly: true,
@@ -60,6 +73,7 @@ module.exports = function(grunt){
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-targethtml');
 
   grunt.registerTask('default', ['jshint','requirejs','concat','less']);
 };
