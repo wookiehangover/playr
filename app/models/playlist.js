@@ -14,6 +14,12 @@ define([
         throw new Error('Requires a parent collection');
       }
 
+      this.listenTo( this.parent, 'usersort', function(){
+        if( this.isNew() ){
+          this.save();
+        }
+      }, this);
+
     },
 
     url: function(){

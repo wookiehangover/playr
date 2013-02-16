@@ -5,9 +5,7 @@ define([
 
   return Backbone.View.extend({
 
-    el: function(){
-      return this.options.parent.$('.controls')[0];
-    },
+    el: $('.controls'),
 
     initialize: function( params ){
       this.parent = params.parent;

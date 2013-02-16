@@ -28,6 +28,32 @@ body {
   margin-left: -470px;
   background: rgba(255,255,255,0.8);
   z-index: 200;
+
+  .controls {
+    position: absolute;
+    right: 0;
+    top: 0;
+    float: left;
+    z-index: 1000;
+
+    a {
+      color: #404040;
+      padding: 6px;
+      float: left;
+      text-decoration: none;
+      .transition(all 100ms ease-out);
+
+      &:hover {
+        background: rgba(0,0,0,0.5);
+        color: #fff;
+      }
+
+    }
+
+    a[data-action=mute], a[data-action=unmute] {
+      color: #ccc;
+    }
+  }
 }
 
 #main {
@@ -49,8 +75,15 @@ body {
     min-width: 12px !important;
     height: 20px;
     background: rgba(255,255,255,0.5);
-    .transition(width 100ms ease-in);
+    .transition(width 100ms linear);
     z-index: 300;
+    cursor: move;
+
+  -webkit-animation: rainbows 100s infinite 5s;
+     -moz-animation: rainbows 100s infinite 5s;
+       -o-animation: rainbows 100s infinite 5s;
+          animation: rainbows 100s infinite 5s;
+
   }
 
   marquee {

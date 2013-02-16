@@ -42,12 +42,15 @@ define([
         }
       }, this);
 
-      this.on('change:order', function(){
-        this.save();
+      this.on('add change:order', function(){
+        if( !this.collection.playlist.isNew() ){
+          this.save();
+        }
       }, this);
     },
 
     destroy: function(){
+
       this.view.remove();
 
       if( this.video ){

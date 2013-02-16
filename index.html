@@ -22,16 +22,19 @@
         <div class="handle"></div>
         <marquee scrolldelay="200"></marquee>
       </div>
+      <div class="controls">
+        <a href="#" data-action="mute" class="icon-volume-off"></a>
+        <a href="#" data-action="unmute" class="icon-volume-up"></a>
+        <a href="#" data-action="prev" class="icon-fast-backward"></a>
+        <a href="#" data-action="play" class="icon-play"></a>
+        <a href="#" data-action="pause" class="icon-pause"></a>
+        <a href="#" data-action="next" class="icon-fast-forward"></a>
+      </div>
     </header>
 
     <div class="container" id="main">
 
       <div id="video">
-        <div class="controls">
-          <a href="#" data-action="play">Play</a>
-          <a href="#" data-action="pause">Pause</a>
-          <a href="#" data-action="next">Next</a>
-        </div>
       </div>
 
       <div class="row">
@@ -44,13 +47,14 @@
               <li><b>TODO:</b> Name and save your playlists.</li>
               <li><b>TODO:</b> Broadcast what you're listening to.</li>
             </ol>
-            <a href="#" class="icon-circle-blank" data-action="destroy"></a>
+            <a href="javascript: void(0)" class="icon-circle-blank" data-action="destroy"></a>
           </li>
           <li class="ghost" draggable="true"></li>
         </ul>
 
         <div id="add-video" class="span4">
           <form action="#">
+            <input type="text" name="playlist[name]"/>
             <textarea name="url" placeholder="Add Songs or Videos by their URL or Embed Code (eg. http://youtu.be/e2QKlmMT8II)"></textarea> 
             <button class="btn btn-primary">Add to Set</button>
           </form>
