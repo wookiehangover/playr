@@ -11,7 +11,7 @@ define([
     initialize: function(){
       this.on('add', function(model){
         if( !model.get('order') ){
-          model.set('order', this.indexOf(model));
+          model.set('order', this.indexOf(model), { silent: true });
         }
       }, this);
 
@@ -20,10 +20,14 @@ define([
       this.playlist = new PlaylistModel(null, { parent: this });
     },
 
+    url: function(){
+      return this.playlist.url() + '/media';
+    },
+
     userSort: function(){
       this.each(function(model){
         var index = model.view.$el.index() - 1;
-        model.set({ order: index }, { silent: true });
+        model.set({ order: index });
       });
 
       this.sort();
@@ -31,6 +35,10 @@ define([
 
     comparator: function(model){
       return model.get('order');
+    },
+
+    toJSON: function(){
+      return this.map(function(model){ return _.clone(model.attributes); });
     },
 
     next: function( model ){

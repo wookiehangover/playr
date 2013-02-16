@@ -3,7 +3,7 @@ define([
   'backbone'
 ], function(_, Backbone){
 
-  var BASE_URL = 'http://playr.dev:3000/playlists';
+  var BASE_URL = 'http://api.playr.dev:3000/playlists';
 
   return Backbone.Model.extend({
 
@@ -11,8 +11,9 @@ define([
       this.parent = params.parent;
 
       if( !this.parent ){
-        throw new Error('Requires a parent model');
+        throw new Error('Requires a parent collection');
       }
+
     },
 
     url: function(){

@@ -23,29 +23,10 @@ require.config({
 
     'plugins/jquery.deparam': [],
 
-    'popcorn/popcorn': {
+    'popcorn/popcorn-complete.min': {
       exports: 'Popcorn'
-    },
-    'popcorn/popcorn.modules': {
-      exports: 'Popcorn',
-      deps: ['popcorn/popcorn']
-    },
-    'popcorn/popcorn.parsers': {
-      exports: 'Popcorn',
-      deps: ['popcorn/popcorn', 'popcorn/popcorn.modules']
-    },
-    'popcorn/popcorn.wrappers': {
-      exports: 'Popcorn',
-      deps: ['popcorn/popcorn']
-    },
-    'popcorn/popcorn.effects': {
-      exports: 'Popcorn',
-      deps: ['popcorn/popcorn']
-    },
-    'popcorn/popcorn.players': {
-      exports: 'Popcorn',
-      deps: ['popcorn/popcorn']
     }
+
   }
 
 });

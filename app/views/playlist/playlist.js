@@ -70,6 +70,7 @@ define([
     },
 
     load: function( id ){
+      var _this = this;
       this.collection.reset();
       this.collection.playlist.set('id', id);
       var dfd = this.collection.playlist.fetch();

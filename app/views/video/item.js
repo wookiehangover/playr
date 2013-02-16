@@ -27,13 +27,7 @@ define([
 
       this.render();
 
-      this.pop = Popcorn.smart('#'+ this.id(), this.model.get('url'), {
-        controls: true,
-        width: 940,
-        height: 480
-      });
-
-      this.listeners();
+      this.listenTo(this.model, 'activate', this.activate);
 
       if( this.model.collection.where({ active: true }).length === 0 || this.model.get('active') ){
         this.model.set('active', true);
@@ -43,10 +37,19 @@ define([
       }
     },
 
+    createPop: function(){
+      this.pop = Popcorn.smart('#'+ this.id(), this.model.get('url'), {
+        controls: true,
+        width: 940,
+        height: 480
+      });
+
+      this.listeners();
+    },
+
     listeners: function(){
       var self = this;
 
-      this.listenTo(this.model, 'activate', this.activate);
 
       this.pop.on('canplay', _.once( this.ready ).bind(this) );
 
@@ -97,6 +100,8 @@ define([
     activate: function( play ){
       var self = this;
 
+      this.createPop();
+
       this.model.collection.each(function(m){
         if( m.video && m !== self ){
           m.video.hide();
@@ -118,11 +123,14 @@ define([
     },
 
     hide: function(){
-      this.pop.pause();
+      if( this.pop ) this.pop.pause();
       this.$el.addClass('js-hidden').removeClass('js-active');
     },
 
     play: function(){
+      if( !this.pop ){
+        this.createPop();
+      }
       var self = this;
       this.dfd.done(function(){
         // make sure that the player is visible when it's played
@@ -141,8 +149,10 @@ define([
     },
 
     remove: function(){
-      this.pop.pause();
-      this.pop.destroy();
+      if( this.pop ){
+        this.pop.pause();
+        this.pop.destroy();
+      }
       Backbone.View.prototype.remove.call(this);
     }
 

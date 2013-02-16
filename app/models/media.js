@@ -1,11 +1,10 @@
 define([
   'underscore',
   'backbone',
-  'popcorn-require',
   'models/youtube',
   'models/soundcloud',
   'models/vimeo'
-], function(_, Backbone, Popcorn, YoutubeModel, SoundcloudModel, VimeoModel){
+], function(_, Backbone, YoutubeModel, SoundcloudModel, VimeoModel){
 
   var types = {
     youtube: /youtube/,
@@ -42,6 +41,10 @@ define([
           this.collection.trigger('activated', this);
         }
       }, this);
+
+      this.on('change:order', function(){
+        this.save();
+      }, this);
     },
 
     destroy: function(){
@@ -59,7 +62,17 @@ define([
         Backbone.trigger('pause');
       }
 
-      this.collection.remove( this );
+      Backbone.Model.prototype.destroy.call(this);
+    },
+
+    toJSON: function(){
+      var model = {
+        media: _.clone(this.attributes)
+      };
+
+      model.media.playlist_id = this.collection.playlist.id;
+
+      return model;
     },
 
     setType: function(){
@@ -76,6 +89,7 @@ define([
 
       if( type === 'youtube' ){
         this.metadata = new YoutubeModel(null, { parent: this });
+        this.set('url', this.get('url') + '&rel=0&controls=0');
       }
 
       if( type === "soundcloud" ){
