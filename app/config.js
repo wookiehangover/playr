@@ -30,3 +30,11 @@ require.config({
   }
 
 });
+
+define(function(require, exports, module){
+
+  module.exports = {
+    BASE_URL: 'http://api.playr.dev:3000'
+  };
+
+});

@@ -22,6 +22,15 @@ define([
       this.listenTo( this.collection, 'activated', this.update);
     },
 
+    events: {
+      'click .dock': 'dock'
+    },
+
+    dock: function(){
+      this.$el.toggleClass('fixed');
+      return false;
+    },
+
     add: function( model ){
       model.video = new VideoItem({ model: model, parent: this });
     },

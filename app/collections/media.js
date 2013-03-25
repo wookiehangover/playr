@@ -1,14 +1,15 @@
-define([
-  'underscore',
-  'backbone',
-  'models/media',
-  'models/playlist'
-], function(_, Backbone, MediaModel, PlaylistModel){
+define(function(require, exports, module){
+
+  var _             = require('underscore');
+  var Backbone      = require('backbone');
+  var MediaModel    = require('models/media');
+  var PlaylistModel = require('models/playlist');
 
   return Backbone.Collection.extend({
     model: MediaModel,
 
     initialize: function(){
+      // set the order when new models are added
       this.on('add', function(model){
         if( !model.get('order') ){
           model.set('order', this.indexOf(model), { silent: true });

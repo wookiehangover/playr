@@ -92,7 +92,6 @@ define([
 
       if( type === 'youtube' ){
         this.metadata = new YoutubeModel(null, { parent: this });
-        this.set('url', this.get('url') + '&rel=0&controls=0');
       }
 
       if( type === "soundcloud" ){
@@ -107,6 +106,12 @@ define([
         this.metadata.on('change', function(){
           this.trigger('change');
         }, this);
+      }
+    },
+
+    validate: function(attrs){
+      if( !$.trim(attrs.url) ){
+        return "You must provide a valid url";
       }
     },
 

@@ -22,7 +22,7 @@ define([
 
       var data = $.deparam( this.$('form').serialize() );
 
-      if( this.collection.add( data, { parse: true }) ){
+      if( this.collection.add( data, { parse: true, validate: true }) ){
         this.$('textarea').val('');
       }
 

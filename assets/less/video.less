@@ -43,6 +43,29 @@
 
   }
 
+  .dock {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #404040;
+    font-weight: bold;
+    &:hover {
+      background:rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 60px;
+    width: 940px;
+    background: rgba(0,0,0,0.5);
+    &:after {
+      content: '';
+      position: static;
+      height: 500px;
+    }
+  }
+
 }
 
 

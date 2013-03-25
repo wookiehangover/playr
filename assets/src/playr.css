@@ -5716,27 +5716,9 @@ ul.icons li [class*=" icon-"] {
   -o-transition: all 500ms ease-out;
   transition: all 500ms ease-out;
 }
-#video .controls {
-  position: absolute;
-  right: 0;
-  top: 0;
-  background: rgba(255, 255, 255, 0.8);
-  float: left;
-  z-index: 1000;
-}
-#video .controls a {
-  color: #404040;
-  padding: 8px 12px 6px;
-  float: left;
-  text-decoration: none;
-  -webkit-transition: all 100ms ease-out;
-  -moz-transition: all 100ms ease-out;
-  -o-transition: all 100ms ease-out;
-  transition: all 100ms ease-out;
-}
-#video .controls a:hover {
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
+#video.soundcloud {
+  visibility: hidden;
+  margin-bottom: -500px;
 }
 #video.soundcloud .media-item {
   -webkit-transition: all 300ms ease-out 200ms;
@@ -5886,12 +5868,6 @@ ul.icons li [class*=" icon-"] {
 #add-video .btn:hover {
   background: #0EB3D3;
 }
-body {
-  -webkit-transition: all 500ms ease-out;
-  -moz-transition: all 500ms ease-out;
-  -o-transition: all 500ms ease-out;
-  transition: all 500ms ease-out;
-}
 #main-header {
   width: 940px;
   position: fixed;
@@ -5900,6 +5876,31 @@ body {
   margin-left: -470px;
   background: rgba(255, 255, 255, 0.8);
   z-index: 200;
+}
+#main-header .controls {
+  position: absolute;
+  right: 0;
+  top: 0;
+  float: left;
+  z-index: 1000;
+}
+#main-header .controls a {
+  color: #404040;
+  padding: 6px;
+  float: left;
+  text-decoration: none;
+  -webkit-transition: all 100ms ease-out;
+  -moz-transition: all 100ms ease-out;
+  -o-transition: all 100ms ease-out;
+  transition: all 100ms ease-out;
+}
+#main-header .controls a:hover {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
+#main-header .controls a[data-action=mute],
+#main-header .controls a[data-action=unmute] {
+  color: #ccc;
 }
 #main {
   margin-top: 60px;
@@ -5920,11 +5921,16 @@ body {
   min-width: 12px !important;
   height: 20px;
   background: rgba(255, 255, 255, 0.5);
-  -webkit-transition: width 100ms ease-in;
-  -moz-transition: width 100ms ease-in;
-  -o-transition: width 100ms ease-in;
-  transition: width 100ms ease-in;
+  -webkit-transition: width 100ms linear;
+  -moz-transition: width 100ms linear;
+  -o-transition: width 100ms linear;
+  transition: width 100ms linear;
   z-index: 300;
+  cursor: move;
+  -webkit-animation: rainbows 100s infinite 5s;
+  -moz-animation: rainbows 100s infinite 5s;
+  -o-animation: rainbows 100s infinite 5s;
+  animation: rainbows 100s infinite 5s;
 }
 #scrubber marquee {
   z-index: 200;

@@ -1,9 +1,10 @@
-define([
-  'underscore',
-  'backbone'
-], function(_, Backbone){
+define(function(require, exports, module){
 
-  var BASE_URL = 'http://api.playr.dev:3000/playlists';
+  var _        = require('underscore');
+  var Backbone = require('backbone');
+  var config   = require('config');
+
+  var BASE_URL = config.BASE_URL +'/playlists';
 
   return Backbone.Model.extend({
 
@@ -30,15 +31,6 @@ define([
       }
 
       return url;
-    },
-
-    sync: function(method, model, options){
-      var settings = _.defaults(options, {
-        xhrFields: {
-          withCredentials: true
-        }
-      });
-      return Backbone.sync(method, model, options);
     },
 
     toJSON: function(){

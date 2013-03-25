@@ -1,19 +1,21 @@
-define([
-  'underscore',
-  'backbone',
-  'views/playlist/playlist',
-  'views/playlist/welcome',
-  'views/video/video',
-  'views/form',
-  'collections/media',
-  'router'
-], function(_, Backbone, Playlist, WelcomeView, Video, Form, MediaCollection, Router){
+define(function(require, exports, module){
+
+  var _               = require('underscore');
+  var Backbone        = require('backbone');
+  var User            = require('./models/user');
+  var MediaCollection = require('./collections/media');
+  var Playlist        = require('./views/playlist/playlist');
+  var WelcomeView     = require('./views/playlist/welcome');
+  var Video           = require('./views/video/video');
+  var Form            = require('./views/form');
+  var Router          = require('./router');
 
   var Playr = Backbone.View.extend({
     el: $('body'),
 
     initialize: function(){
       this.collection = new MediaCollection();
+      this.user = new User();
 
       this.welcomeMessage = new WelcomeView();
 
@@ -28,12 +30,6 @@ define([
 
       this.listenTo( Backbone, 'playing', this.playing);
       this.listenTo( Backbone, 'pause', this.pause);
-
-      this.focusAdd();
-    },
-
-    events: {
-      'click': 'focusAdd'
     },
 
     playing: function(){
@@ -42,12 +38,6 @@ define([
 
     pause: function(){
       this.$el.removeClass('playing');
-    },
-
-    focusAdd: function(){
-      setTimeout(_.bind(function(){
-        this.$('textarea').select();
-      }, this), 200);
     }
   });
 

@@ -3,6 +3,12 @@ require([
   'playr'
 ], function( Backbone, Playr ){
 
+  $.ajaxSetup({
+    xhrFields: {
+      withCredentials: true
+    }
+  });
+
   $(function(){
     window.Playr = new Playr();
 
